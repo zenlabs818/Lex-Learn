@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lex Learn</title>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+
+<style>
+  body {
+    margin: 0;
+  }
+
+  #pdfViewer {
+    width: 100%;
+    height: calc(100vh - 60px);
+    border: none;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Top bar -->
+<div class="w3-bar w3-teal w3-top">
+  <button class="w3-bar-item w3-button w3-hide-large" onclick="w3_open()">☰</button>
+  <span class="w3-bar-item">Lex Learn</span>
+</div>
+
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-teal"
+     style="width:200px; display:none"
+     id="mySidebar">
+
+  <button class="w3-bar-item w3-button w3-hide-large" onclick="w3_close()">Close ×</button>
+  <a href="../../index.html">Home</a>
+
+  <h3 class="w3-bar-item">GEAOGRAPHY</h3>
+</nav>
+
+<!-- Main content -->
+<div class="w3-main" style="margin-left:200px; margin-top:60px">
+
+  <iframe id="pdfViewer"></iframe>
+
+</div>
+
+<script>
+  // Sidebar controls
+  function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+  }
+
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+  }
+
+  // List of topics and their PDF files
+  const topics = [
+    { name: "CONCEPTS OF GEOGRAPHY", file: "geography/Concepts_of_Geography-1.pdf" },
+    { name: "SOLAR SYSTEM", file: "geography/Solar_System-2.pdf" },
+    { name: "EXPLORING EARTH SHAPE AND COORDINATES", file: "geography/Exploring_earth_shape_and_cordinates-3.pdf" },
+    { name: "MAPPING ESSENSIALS AND RELIEF", file: "geography/Mapping_essentials_and_relief_rep-4.pdf" },
+    { name: "GHANA PHYSICAL ENVIRONMENT", file:"geography/Ghana_Physical_environment-5.pdf"},
+    { name: "PRIMARY ECONOMIC ACTIVITIES", file:"geography/Primary_Economic_Activities-6.pdf"},
+    { name: "ROCK AND WEATHERING", file:"geography/Rocks_and_Weathering-7.pdf"},
+    { name: "COMPOSITION AND STRUCTURE OF THE EARTHS ATMOSPHERE", file:"geography/composition_and_structure of the earths_atmosphere-8.pdf"},
+    { name: "MATHODS OF COLLECTING GEOGRAPHIC DATA", file:"geography/Methods_of_collecting_geographic_data-9.pdf"},
+    { name: "CLIMATE VEGETATION AND SOIL", file:"geography/climate_vegetation_and_soil-10.pdf"},
+    { name: "MINING IN GHANA", file:"geography/Mining_in_ghana-11.pdf"},
+    { name: "POPULATION IN GHANA", file:"geography/Population_In_Ghana-12.pdf"},
+    { name: "ENVIRONMENTAL HAZARD", file:"geography/environmental_Hazard-13.pdf" },
+    { name: "GEAOGRAPHY YEAR 2", file:"geography/Geography_YEAR-2.pdf"},
+
+    // Add more sections here
+  ];
+
+   const sidebar = document.getElementById("mySidebar");
+  const pdfViewer = document.getElementById("pdfViewer");
+
+  topics.forEach(topic => {
+    const btn = document.createElement("button");
+    btn.className = "w3-bar-item w3-button";
+    btn.textContent = topic.name;
+    btn.onclick = () => {
+      pdfViewer.src = topic.file;
+      if (window.innerWidth < 992) w3_close();
+    };
+    sidebar.appendChild(btn);
+  });
+
+  // Load first PDF
+  pdfViewer.src = topics[0].file;
+
+  // Show sidebar on large screens
+  if (window.innerWidth >= 992) {
+    document.getElementById("mySidebar").style.display = "block";
+  }
+</script>
+
+</body>
+</html>
