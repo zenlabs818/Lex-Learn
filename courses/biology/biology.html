@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lex Learn</title>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+
+<style>
+  body {
+    margin: 0;
+  }
+
+  #pdfViewer {
+    width: 100%;
+    height: calc(100vh - 60px);
+    border: none;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Top bar -->
+<div class="w3-bar w3-teal w3-top">
+  <button class="w3-bar-item w3-button w3-hide-large" onclick="w3_open()">☰</button>
+  <span class="w3-bar-item">Lex Learn</span>
+</div>
+
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-teal"
+     style="width:200px; display:none"
+     id="mySidebar">
+
+  <button class="w3-bar-item w3-button w3-hide-large" onclick="w3_close()">Close ×</button>
+  <a href="../../index.html">Home</a>
+
+  <h3 class="w3-bar-item">Biology</h3>
+</nav>
+
+<!-- Main content -->
+<div class="w3-main" style="margin-left:200px; margin-top:60px">
+
+  <iframe id="pdfViewer"></iframe>
+
+</div>
+
+<script>
+  // Sidebar controls
+  function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+  }
+
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+  }
+
+  // Topics
+  const topics = [
+    { name: "Introduction to Biology", file: "biology/introduction_to_biology-1-LVersion.pdf" },
+    { name: "Fish Farming", file: "biology/Fish_farming-2-LVersion.pdf" },
+    { name: "Cell Biology", file: "biology/cell_biology-3-LVersion.pdf" },
+    { name: "Organisms", file: "biology/organisms-4-LVersion.pdf" },
+    { name: "Ecology", file: "biology/Ecology-5-LVersion.pdf" },
+    { name: "Disease & Infection", file: "biology/disease_and_infection-6-LVersion-.pdf" },
+    { name: "Mammalian System", file: "biology/mamalian_system-7-LVersion.pdf" }
+  ];
+
+  const sidebar = document.getElementById("mySidebar");
+  const pdfViewer = document.getElementById("pdfViewer");
+
+  topics.forEach(topic => {
+    const btn = document.createElement("button");
+    btn.className = "w3-bar-item w3-button";
+    btn.textContent = topic.name;
+    btn.onclick = () => {
+      pdfViewer.src = topic.file;
+      if (window.innerWidth < 992) w3_close();
+    };
+    sidebar.appendChild(btn);
+  });
+
+  // Load first PDF
+  pdfViewer.src = topics[0].file;
+
+  // Show sidebar on large screens
+  if (window.innerWidth >= 992) {
+    document.getElementById("mySidebar").style.display = "block";
+  }
+</script>
+
+</body>
+</html>
