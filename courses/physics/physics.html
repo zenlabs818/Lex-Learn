@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lex Learn</title>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+
+<style>
+  body {
+    margin: 0;
+  }
+
+  #pdfViewer {
+    width: 100%;
+    height: calc(100vh - 60px);
+    border: none;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Top bar -->
+<div class="w3-bar w3-teal w3-top">
+  <button class="w3-bar-item w3-button w3-hide-large" onclick="w3_open()">☰</button>
+  <span class="w3-bar-item">Lex Learn</span>
+</div>
+
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-teal"
+     style="width:200px; display:none"
+     id="mySidebar">
+
+  <button class="w3-bar-item w3-button w3-hide-large" onclick="w3_close()">Close ×</button>
+  <a href="../../index.html">Home</a>
+  <h3 class="w3-bar-item">Biology</h3>
+</nav>
+
+<!-- Main content -->
+<div class="w3-main" style="margin-left:200px; margin-top:60px">
+
+  <iframe id="pdfViewer"></iframe>
+
+</div>
+
+<script>
+  // Sidebar controls
+  function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+  }
+
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+  }
+  // List of topics and their PDF files
+  const topics = [
+    { name: "INTRODUCTION TO PHYSICS AND MATTER",  file:"physics/LM-physics-section-1-LV.pdf"},
+    { name: "INTRODUCTION TO PHYSICS AND MATTER", file: "physics/LM-physics-section-1-LV.pdf" },
+    { name: "MOTION AND PRESSURE", file: "physics/LM_Physics-section-2-LVersion.pdf" },
+    { name: "MIRRORS,REFLECTION AND REFRACTION", file: "physics/LM-Physics-Section-4-LVersion.pdf" },
+    { name: "BEHAVIOUR OF LIGHT THROUGH DIFFERENT MEDIA", file: "physics/Physics-section-5-LV.pdf"},
+    { name: "ELECTRICAL CHARGE AND MAGNETISM", file: "physics/Physics-section-6-LV.pdf" },
+    { name: "SEMI CONDUCTORS,TRANSDUCERS AND THEIR APPLICATIONS", file: "physics/LM-Physics-section-7-LVersion.pdf"},
+    { name: "FUNDAMENTAL CONCEPTS IN ATOMIC AND NUCLEAR PHYSICS", file: "physics/LM-Physics-section-8-LVersion.pdf"},
+     { name: "PHYSICS FORM 2", file:"physics/LM-Physics-book-2-_online.pdf"},
+    
+    // Add more sections here
+  ];
+
+  const sidebar = document.getElementById("mySidebar");
+  const pdfViewer = document.getElementById("pdfViewer");
+
+  topics.forEach(topic => {
+    const btn = document.createElement("button");
+    btn.className = "w3-bar-item w3-button";
+    btn.textContent = topic.name;
+    btn.onclick = () => {
+      pdfViewer.src = topic.file;
+      if (window.innerWidth < 992) w3_close();
+    };
+    sidebar.appendChild(btn);
+  });
+
+  // Load first PDF
+  pdfViewer.src = topics[0].file;
+  
+  // Show sidebar on large screens
+  if (window.innerWidth >= 992) {
+    document.getElementById("mySidebar").style.display = "block";
+  }
+</script>
+
+</body>
+</html>
